@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require("mongoose");
+//Campground = require('../models/campgrounds');
 var router = express.Router();
 
 //SCHEMA setup
@@ -10,7 +11,6 @@ var campSchema = new mongoose.Schema({
 });
 
 var Campground = mongoose.model("Campground", campSchema);
-
 /*Campground.create({
     name: "Sauraha",
     image: "http://www.wildnatureimages.com/images%203/060731-372..jpg"
@@ -22,20 +22,6 @@ var Campground = mongoose.model("Campground", campSchema);
         console.log(campground);
     }
 });*/
-
-var campgrounds = [
-    {name: "Sauraha", image: "http://www.wildnatureimages.com/images%203/060731-372..jpg"},
-    {name: "Markhu", image: "http://www.nationalparks.nsw.gov.au/~/media/D97B5C772FB44716B8CD3E5289685B96.ashx"},
-    {name: "Nagarkot", image: "http://www.holidaystonepal.com/wp-content/uploads/2017/01/camping-1024x559.jpg"},
-    {name: "Sauraha", image: "http://www.wildnatureimages.com/images%203/060731-372..jpg"},
-    {name: "Markhu", image: "http://www.nationalparks.nsw.gov.au/~/media/D97B5C772FB44716B8CD3E5289685B96.ashx"},
-    {name: "Nagarkot", image: "http://www.holidaystonepal.com/wp-content/uploads/2017/01/camping-1024x559.jpg"},
-    {name: "Sauraha", image: "http://www.wildnatureimages.com/images%203/060731-372..jpg"},
-    {name: "Markhu", image: "http://www.nationalparks.nsw.gov.au/~/media/D97B5C772FB44716B8CD3E5289685B96.ashx"},
-    {name: "Nagarkot", image: "http://www.holidaystonepal.com/wp-content/uploads/2017/01/camping-1024x559.jpg"}
-];
-
-
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'YelpCamp' });
