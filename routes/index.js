@@ -1,31 +1,9 @@
 var express = require('express');
 var mongoose = require("mongoose");
+var Campground = require("../models/campgrounds.js");
 //Campground = require('../models/campgrounds');
 var router = express.Router();
 
-//SCHEMA setup
-var campSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-var Campground = mongoose.model("Campground", campSchema);
-/*Campground.create({
-    name: "Sauraha",
-    image: "http://www.wildnatureimages.com/images%203/060731-372..jpg"
-    }, function (err, campground) {
-    if(err){
-        console.log("error occured");
-    } else {
-        console.log("New Campground Added");
-        console.log(campground);
-    }
-});*/
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'YelpCamp' });
-// });
 
 router.get('/', function (req, res, next) {
     Campground.find({}, function (err, allCampgrounds) {
@@ -35,13 +13,14 @@ router.get('/', function (req, res, next) {
             res.render("campgrounds", {campgrounds: allCampgrounds});
         }
     });
-    //res.render("campgrounds", {campgrounds: campgrounds});
 });
 
+//INDEX - Show all the campgrounds
 router.get("/campgrounds",function (req, res, next) {
     res.redirect('/');
 });
 
+//CREATE - create new campsite to DB
 router.post("/campgrounds", function (req, res, next) {
     var name = req.body.name;
     var image = req.body.image;
@@ -58,15 +37,18 @@ router.post("/campgrounds", function (req, res, next) {
     res.redirect("/campgrounds");
 });
 
+//New - Form to create new campsite
 router.get("/campgrounds/new", function (req, res, next) {
    res.render("new");
 });
 
+//Show - Show the specific campsite
 router.get("/campgrounds/:id", function (req, res, next) {
-    Campground.findById(req.params.id, function (err, foundCampground) {
+    Campground.findById(req.params.id).populate("comments").exec(function (err, foundCampground) {
        if(err){
            console.log("Error finding the camp by id");
        } else {
+           console.log(foundCampground);
            res.render("show", {campground: foundCampground});
        }
     });
